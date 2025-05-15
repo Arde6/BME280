@@ -5,6 +5,7 @@
 
 // Own stuff
 #include "Identification.h"
+#include "MQTT.h"
 
 #define SEALEVELPRESSURE_HPA (1013.25)
 
@@ -30,6 +31,8 @@ void setup() {
   }
 
   id = idSetup();
+  //wifiBegin();
+  //mqttBegin();
 }
 
 void loop() {
@@ -62,6 +65,8 @@ void loop() {
   lcd.setCursor(0, 1);
   lcd.print("ID:");
   lcd.print(id);
+
+  //mqttPublish(temperature, humidity, pressure, id);
 
   delay(2000); // Wait for 2 seconds
 }
