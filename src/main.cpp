@@ -17,56 +17,56 @@ Adafruit_BME280 bme; // I2C
 int id = -1;
 
 void setup() {
-  Serial.begin(9600);
+    Serial.begin(115200);
 
-  // Initialize the LCD
-  lcd.init();
-  lcd.backlight();
+    // Initialize the LCD
+    lcd.init();
+    lcd.backlight();
 
-  // Initialize the BME280 sensor
-  if (!bme.begin(0x77)) {
-    Serial.println("Could not find a valid BME280 sensor, check wiring!");
-    lcd.print("Sensor Error");
-    while (1);
-  }
+    // Initialize the BME280 sensor
+    if (!bme.begin(0x77)) {
+      Serial.println("Could not find a valid BME280 sensor, check wiring!");
+      lcd.print("Sensor Error");
+      while (1);
+    }
 
-  id = idSetup();
-  //wifiBegin();
-  //mqttBegin();
+    id = idSetup();
+    //wifiBegin();
+    //mqttBegin();
 }
 
 void loop() {
-  // Read values from the BME280 sensor
-  float temperature = bme.readTemperature();
-  float humidity = bme.readHumidity();
-  float pressure = bme.readPressure() / 100.0F;
-  id =  idSetup();
+    // Read values from the BME280 sensor
+    float temperature = bme.readTemperature();
+    float humidity = bme.readHumidity();
+    float pressure = bme.readPressure() / 100.0F;
+    id =  idSetup();
 
-  // Display the values on the LCD
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("T:");
-  lcd.print(temperature);
-  lcd.print("C");
+    // Display the values on the LCD
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("T:");
+    lcd.print(temperature);
+    lcd.print("C");
 
-  lcd.setCursor(0, 1);
-  lcd.print("H:");
-  lcd.print(humidity);
-  lcd.print("%");
+    lcd.setCursor(0, 1);
+    lcd.print("H:");
+    lcd.print(humidity);
+    lcd.print("%");
 
-  delay(2000); // Wait for 2 seconds
+    delay(2000); // Wait for 2 seconds
 
-  lcd.clear();
-  lcd.setCursor(0, 0);
-  lcd.print("P:");
-  lcd.print(pressure);
-  lcd.print("hPa");
+    lcd.clear();
+    lcd.setCursor(0, 0);
+    lcd.print("P:");
+    lcd.print(pressure);
+    lcd.print("hPa");
 
-  lcd.setCursor(0, 1);
-  lcd.print("ID:");
-  lcd.print(id);
+    lcd.setCursor(0, 1);
+    lcd.print("ID:");
+    lcd.print(id);
 
-  //mqttPublish(temperature, humidity, pressure, id);
+    //mqttPublish(temperature, humidity, pressure, id);
 
-  delay(2000); // Wait for 2 seconds
+    delay(2000); // Wait for 2 seconds
 }
